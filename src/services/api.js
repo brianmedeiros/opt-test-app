@@ -1,4 +1,6 @@
 // values from env
+import { getCache, setCache } from "./cache";
+
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -31,10 +33,41 @@ async function fetchFromApi(endpoint) {
 
 // get trending movies for period of time
 export async function getTrendingMovies(timeWindow = 'week') {
-    return fetchFromApi(`/trending/movie/${timeWindow}`);
+    // create cache key
+    const cacheKey = `trending_${timeWindow}`;
+
+    // check cache first
+    const cached = getCache(cacheKey);
+    if (cached) {
+        console.log('Returning cached for trending movies');
+        return cached;
+    }
+
+    // fetch from API
+    console.log('Fetching from API for trending movies');
+    const data = await fetchFromApi(`/trending/movie/${timeWindow}`);
+
+    // store in cache
+    setCache(cacheKey, data);
+
+    return data;
 }
 
 // get movie details by id
 export async function getMovieDetails(movieId) {
-    return fetchFromApi(`/movie/${movieId}`);
+    const cacheKey = `movie_${movieId}`;
+
+    // check cache first
+    const cached = getCache(cacheKey);
+    if (cached) {
+        console.log('Returning cached for movie details');
+        return cached;
+    }
+
+    // fetch from API
+    console.log('Fetching from API for movie details');
+    const data = await fetchFromApi(`/movie/${movieId}`);
+    setCache(cacheKey, data);
+
+    return data;
 }
