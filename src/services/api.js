@@ -1,5 +1,5 @@
 // values from env
-import { getCache, setCache } from "./cache";
+import { getCached, setCache } from './cache';
 
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL;
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -37,7 +37,7 @@ export async function getTrendingMovies(timeWindow = 'week') {
     const cacheKey = `trending_${timeWindow}`;
 
     // check cache first
-    const cached = getCache(cacheKey);
+    const cached = getCached(cacheKey);
     if (cached) {
         console.log('Returning cached for trending movies');
         return cached;
@@ -58,7 +58,7 @@ export async function getMovieDetails(movieId) {
     const cacheKey = `movie_${movieId}`;
 
     // check cache first
-    const cached = getCache(cacheKey);
+    const cached = getCached(cacheKey);
     if (cached) {
         console.log('Returning cached for movie details');
         return cached;

@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, Link } from "react-router";
 import { useMovieDetails } from "../hooks/useMovieDetails";
 import { useFavorites } from "../hooks/useFavorites";
 import { Loading } from "../components/Loading";
@@ -39,7 +39,7 @@ export function MovieDetailPage() {
     // construct poster url
     const posterUrl = movie.poster_path
         ? `${IMAGE_BASE_URL}/w500${movie.poster_path}`
-        : 'placeholder-poster.png';
+        : '/images/placeholder-poster.png';
 
     const backdropUrl = movie.backdrop_path
         ? `${IMAGE_BASE_URL}/w1280${movie.backdrop_path}`
