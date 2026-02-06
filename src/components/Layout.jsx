@@ -10,7 +10,7 @@ export function Layout() {
       <header className="app-header">
         <nav className="app-nav">
           <Link to="/" className="app-logo">
-            Movie Browser
+            The Movie Internet
           </Link>
           <div className="nav-links">
             <Link to="/">Home</Link>

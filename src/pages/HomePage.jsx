@@ -33,7 +33,7 @@ export function HomePage() {
         <div className="home-page">
             <section className='page-header'>
                 <h1>Trending Movies</h1>
-                <p>Discover the most popular movies of the week</p>
+                <p>The most popular movies of the week</p>
             </section>
 
             <MovieList
