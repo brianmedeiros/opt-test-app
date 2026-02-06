@@ -36,7 +36,6 @@ export function MovieDetailPage() {
     ? `${IMAGE_BASE_URL}/w500${movie.poster_path}`
     : '/images/placeholder-poster.png';
 
-  const backdropUrl = movie.backdrop_path ? `${IMAGE_BASE_URL}/w1280${movie.backdrop_path}` : null;
 
   // runtime
   const formatRuntime = (minutes) => {
@@ -68,10 +67,6 @@ export function MovieDetailPage() {
         </Link>
       </nav>
 
-      {/* Backdrop Image */}
-      {backdropUrl && (
-        <div className="movie-backdrop" style={{ backgroundImage: `url(${backdropUrl})` }} />
-      )}
 
       {/* Main Content */}
       <div className="movie-detail-content">
