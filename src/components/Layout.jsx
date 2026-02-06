@@ -24,7 +24,7 @@ export function Layout() {
       </main>
 
       <footer className="app-footer">
-        <p>Powered by TMDB</p>
+        <p>Powered by TMDB - Be Kind, Please Rewind </p>
       </footer>
     </div>
   );
