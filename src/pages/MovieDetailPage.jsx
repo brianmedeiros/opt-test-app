@@ -36,7 +36,6 @@ export function MovieDetailPage() {
     ? `${IMAGE_BASE_URL}/w500${movie.poster_path}`
     : '/images/placeholder-poster.png';
 
-
   // runtime
   const formatRuntime = (minutes) => {
     if (!minutes) return 'Unknown';
@@ -66,7 +65,6 @@ export function MovieDetailPage() {
           ← Back to Movies
         </Link>
       </nav>
-
 
       {/* Main Content */}
       <div className="movie-detail-content">

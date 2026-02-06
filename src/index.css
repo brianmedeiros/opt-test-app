@@ -8,10 +8,11 @@
   --border: #333333;
 }
 
-
-
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -127,7 +128,6 @@ img {
   border-radius: 4px;
   font-size: 1rem;
 }
-
 
 /* Home Page */
 .page-header {
