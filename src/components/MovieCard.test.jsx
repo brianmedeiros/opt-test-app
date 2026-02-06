@@ -3,11 +3,16 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { MovieCard } from "./MovieCard";
 import { BrowserRouter } from "react-router";
 
+// helper to render with router context
+function renderWithRouter(ui) {
+    return render(<BrowserRouter>{ui}</BrowserRouter>);
+}
+
 // Mock movie data
 const mockMovie = {
     id: 123,
     title: "Test Movie",
-    release_date: "2020-01-01",
+    release_date: "2020-03-08",
     vote_average: 7.5,
     poster_path: "/test-poster.jpg"
 };
@@ -71,19 +76,4 @@ describe("MovieCard", () => {
     });
 });
 
-// mock function
-const mockToggle = vi.fn();
 
-// check if it was called
-expect(mockToggle).toHaveBeenCalledTimes(1);
-expect(mockToggle).toHaveBeenCalledWith(mockMovie);
-
-// helper to render with router context
-function renderWithRouter(ui) {
-    return render(<BrowserRouter>{ui}</BrowserRouter>);
-}
-
-screen.getByText("Test Movie");
-screen.getByRole('button');
-screen.getByRole('link');
-screen.getByRole('img');

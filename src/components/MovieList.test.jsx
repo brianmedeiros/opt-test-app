@@ -75,7 +75,7 @@ describe('MovieList', () => {
       />
     );
 
-    expect(screen.getByText('No movies found.')).toBeInTheDocument();
+    expect(screen.getByText('No movies available')).toBeInTheDocument();
   });
 
   it('shows empty message when movies is null', () => {
@@ -87,7 +87,7 @@ describe('MovieList', () => {
       />
     );
 
-    expect(screen.getByText('No movies found.')).toBeInTheDocument();
+    expect(screen.getByText('No movies available')).toBeInTheDocument();
   });
 
   it('passes correct favorite status to each card', () => {

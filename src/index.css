@@ -232,6 +232,12 @@ img {
   object-fit: cover;
 }
 
+/* Show a placeholder if image fails to load */
+.movie-card-poster img[src=""],
+.movie-card-poster img:not([src]) {
+  visibility: hidden;
+}
+
 .favorite-button {
   position: absolute;
   top: 0.5rem;

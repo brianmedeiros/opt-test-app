@@ -15,7 +15,7 @@ export function MovieCard({movie, isFavorite, onToggleFavorite}) {
     // construct image url
     const posterUrl = movie.poster_path
         ? `${IMAGE_BASE_URL}/w300${movie.poster_path}`
-        : 'placeholder-poster.png'; // fallback image
+        : '/images/placeholder-poster.png'; // fallback image
 
         // extract release year
         const releaseYear = movie.release_date
