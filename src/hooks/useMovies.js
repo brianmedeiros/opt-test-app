@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { getTrendingMovies } from "../services/api";
 
+/**
+ * Custom hook for fetching trending movies
+ *
+ * @param {string} timeWindow - 'day' or 'week' (default: 'week')
+ * @returns {object} - { movies, loading, error }
+ */
+
 export function useMovies(timeWindow = 'week') {
     // state for movies
     const [movies, setMovies] = useState([]);
@@ -16,7 +23,6 @@ export function useMovies(timeWindow = 'week') {
                 // start loading, clear error
                 setLoading(true);
                 setError(null);
-
                 const data = await getTrendingMovies(timeWindow);
 
                 // update state
@@ -42,4 +48,5 @@ export function useMovies(timeWindow = 'week') {
 
     }, [timeWindow]);
 
+    return { movies, loading, error };
 }
