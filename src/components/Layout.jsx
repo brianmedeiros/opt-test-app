@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router";
+import { Outlet, Link } from 'react-router';
 
 /**
  * Layout wrapper

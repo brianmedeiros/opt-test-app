@@ -5,7 +5,6 @@ import { renderHook, act } from '@testing-library/react';
 import { useFavorites } from './useFavorites';
 
 describe('useFavorites', () => {
-
   beforeEach(() => {
     // Clear localStorage before each test
     localStorage.clear();
@@ -85,33 +84,32 @@ describe('useFavorites', () => {
   });
 
   it('persists favorites between hook instances', () => {
-  const movie = { id: 1, title: 'Test Movie' };
+    const movie = { id: 1, title: 'Test Movie' };
 
-  // First instance - add favorite
-  const { result: result1, unmount } = renderHook(() => useFavorites());
-  act(() => {
-    result1.current.addFavorite(movie);
+    // First instance - add favorite
+    const { result: result1, unmount } = renderHook(() => useFavorites());
+    act(() => {
+      result1.current.addFavorite(movie);
+    });
+    unmount();
+
+    // Second instance - favorite should still exist
+    const { result: result2 } = renderHook(() => useFavorites());
+    expect(result2.current.favorites).toEqual([movie]);
   });
-  unmount();
 
-  // Second instance - favorite should still exist
-  const { result: result2 } = renderHook(() => useFavorites());
-  expect(result2.current.favorites).toEqual([movie]);
-});
+  it('loads existing favorites on init', () => {
+    const movie = { id: 99, title: 'Existing Movie' };
 
-it('loads existing favorites on init', () => {
-  const movie = { id: 99, title: 'Existing Movie' };
+    // First instance adds a movie
+    const { result: first, unmount } = renderHook(() => useFavorites());
+    act(() => {
+      first.current.addFavorite(movie);
+    });
+    unmount();
 
-  // First instance adds a movie
-  const { result: first, unmount } = renderHook(() => useFavorites());
-  act(() => {
-    first.current.addFavorite(movie);
+    // New instance should have it
+    const { result: second } = renderHook(() => useFavorites());
+    expect(second.current.isFavorite(99)).toBe(true); // ← Changed 'result' to 'second'
   });
-  unmount();
-
-  // New instance should have it
-  const { result: second } = renderHook(() => useFavorites());
-  expect(second.current.isFavorite(99)).toBe(true);  // ← Changed 'result' to 'second'
-});
-
 });

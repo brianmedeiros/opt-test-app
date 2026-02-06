@@ -30,8 +30,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background-color: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
@@ -208,7 +208,9 @@ img {
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-card);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .movie-card:hover {
@@ -233,7 +235,7 @@ img {
 }
 
 /* Show a placeholder if image fails to load */
-.movie-card-poster img[src=""],
+.movie-card-poster img[src=''],
 .movie-card-poster img:not([src]) {
   visibility: hidden;
 }
@@ -251,7 +253,9 @@ img {
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  transition: transform 0.2s, background-color 0.2s;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
 }
 
 .favorite-button:hover {
@@ -384,7 +388,9 @@ img {
   padding: 1rem 2rem;
   border-radius: var(--radius-md);
   font-size: 1rem;
-  transition: background-color 0.2s, transform 0.2s;
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
 }
 
 .favorite-button-large:hover {

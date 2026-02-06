@@ -1,4 +1,4 @@
-import { MovieCard } from "./MovieCard";
+import { MovieCard } from './MovieCard';
 
 /**
  *display grid of movie cards
@@ -9,22 +9,20 @@ import { MovieCard } from "./MovieCard";
  */
 
 export function MovieList({ movies, isFavorite, onToggleFavorite }) {
-    if (!movies || movies.length === 0) {
-        return (
-            <div className="movie-list-empty">No movies available</div>
-        );
-    }
+  if (!movies || movies.length === 0) {
+    return <div className="movie-list-empty">No movies available</div>;
+  }
 
-    return (
-        <div className="movie-list">
-            {movies.map((movie) => (
-                <MovieCard
-                    key={movie.id}
-                    movie={movie}
-                    isFavorite={isFavorite(movie.id)}
-                    onToggleFavorite={onToggleFavorite}
-                />
-            ))}
-        </div>
-    );
+  return (
+    <div className="movie-list">
+      {movies.map((movie) => (
+        <MovieCard
+          key={movie.id}
+          movie={movie}
+          isFavorite={isFavorite(movie.id)}
+          onToggleFavorite={onToggleFavorite}
+        />
+      ))}
+    </div>
+  );
 }

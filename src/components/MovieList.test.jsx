@@ -1,6 +1,6 @@
 // src/components/MovieList.test.jsx
 
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { MovieList } from './MovieList';
@@ -30,22 +30,13 @@ const mockMovies = [
 ];
 
 function renderWithRouter(component) {
-  return render(
-    <BrowserRouter>
-      {component}
-    </BrowserRouter>
-  );
+  return render(<BrowserRouter>{component}</BrowserRouter>);
 }
 
 describe('MovieList', () => {
-
   it('renders all movies', () => {
     renderWithRouter(
-      <MovieList
-        movies={mockMovies}
-        isFavorite={() => false}
-        onToggleFavorite={() => {}}
-      />
+      <MovieList movies={mockMovies} isFavorite={() => false} onToggleFavorite={() => {}} />
     );
 
     expect(screen.getByText('Movie One')).toBeInTheDocument();
@@ -55,11 +46,7 @@ describe('MovieList', () => {
 
   it('renders correct number of movie cards', () => {
     renderWithRouter(
-      <MovieList
-        movies={mockMovies}
-        isFavorite={() => false}
-        onToggleFavorite={() => {}}
-      />
+      <MovieList movies={mockMovies} isFavorite={() => false} onToggleFavorite={() => {}} />
     );
 
     const links = screen.getAllByRole('link');
@@ -68,11 +55,7 @@ describe('MovieList', () => {
 
   it('shows empty message when no movies', () => {
     renderWithRouter(
-      <MovieList
-        movies={[]}
-        isFavorite={() => false}
-        onToggleFavorite={() => {}}
-      />
+      <MovieList movies={[]} isFavorite={() => false} onToggleFavorite={() => {}} />
     );
 
     expect(screen.getByText('No movies available')).toBeInTheDocument();
@@ -80,11 +63,7 @@ describe('MovieList', () => {
 
   it('shows empty message when movies is null', () => {
     renderWithRouter(
-      <MovieList
-        movies={null}
-        isFavorite={() => false}
-        onToggleFavorite={() => {}}
-      />
+      <MovieList movies={null} isFavorite={() => false} onToggleFavorite={() => {}} />
     );
 
     expect(screen.getByText('No movies available')).toBeInTheDocument();
@@ -95,11 +74,7 @@ describe('MovieList', () => {
     const isFavorite = (id) => id === 2;
 
     renderWithRouter(
-      <MovieList
-        movies={mockMovies}
-        isFavorite={isFavorite}
-        onToggleFavorite={() => {}}
-      />
+      <MovieList movies={mockMovies} isFavorite={isFavorite} onToggleFavorite={() => {}} />
     );
 
     const buttons = screen.getAllByRole('button');
@@ -111,5 +86,4 @@ describe('MovieList', () => {
     // Second should be filled heart
     expect(buttons[1]).toHaveTextContent('❤️');
   });
-
 });

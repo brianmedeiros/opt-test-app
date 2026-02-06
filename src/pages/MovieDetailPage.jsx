@@ -1,8 +1,8 @@
-import { useParams, Link } from "react-router";
-import { useMovieDetails } from "../hooks/useMovieDetails";
-import { useFavorites } from "../hooks/useFavorites";
-import { Loading } from "../components/Loading";
-import { ErrorMessage } from "../components/ErrorMessage";
+import { useParams, Link } from 'react-router';
+import { useMovieDetails } from '../hooks/useMovieDetails';
+import { useFavorites } from '../hooks/useFavorites';
+import { Loading } from '../components/Loading';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 const IMAGE_BASE_URL = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
 
@@ -11,62 +11,55 @@ const IMAGE_BASE_URL = import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
  */
 
 export function MovieDetailPage() {
-    // get movie id from url params
-    const { movieId } = useParams();
-    // fetch movie details
-    const { movie, loading, error } = useMovieDetails(movieId);
-    // favorites
-    const { isFavorite, toggleFavorite } = useFavorites();
+  // get movie id from url params
+  const { movieId } = useParams();
+  // fetch movie details
+  const { movie, loading, error } = useMovieDetails(movieId);
+  // favorites
+  const { isFavorite, toggleFavorite } = useFavorites();
 
-    if (loading) {
-        return <Loading />;
-    }
+  if (loading) {
+    return <Loading />;
+  }
 
-    if (error) {
-        return (
-            <ErrorMessage
-                message={error}
-                onRetry={() => window.location.reload()}
-            />
-        );
-    }
+  if (error) {
+    return <ErrorMessage message={error} onRetry={() => window.location.reload()} />;
+  }
 
-    // if movie not found
-    if (!movie) {
-        return <ErrorMessage message="Movie not found" />;
-    }
+  // if movie not found
+  if (!movie) {
+    return <ErrorMessage message="Movie not found" />;
+  }
 
-    // construct poster url
-    const posterUrl = movie.poster_path
-        ? `${IMAGE_BASE_URL}/w500${movie.poster_path}`
-        : '/images/placeholder-poster.png';
+  // construct poster url
+  const posterUrl = movie.poster_path
+    ? `${IMAGE_BASE_URL}/w500${movie.poster_path}`
+    : '/images/placeholder-poster.png';
 
-    const backdropUrl = movie.backdrop_path
-        ? `${IMAGE_BASE_URL}/w1280${movie.backdrop_path}`
-        : null;
+  const backdropUrl = movie.backdrop_path ? `${IMAGE_BASE_URL}/w1280${movie.backdrop_path}` : null;
 
-    // runtime
-    const formatRuntime = (minutes) => {
-        if (!minutes) return 'Unknown';
-        const hours = Math.floor(minutes / 60);
-        const mins = minutes % 60;
-        return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
-    };
+  // runtime
+  const formatRuntime = (minutes) => {
+    if (!minutes) return 'Unknown';
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+  };
 
-    // movie date
-    const formatDate = (dateString) => {
-        if (!dateString) return 'Unknown';
-        return new Date(dateString).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
-    };
+  // movie date
+  const formatDate = (dateString) => {
+    if (!dateString) return 'Unknown';
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
 
-    // check if movie is favorite
-    const isMovieFavorite = isFavorite(movie.id);
+  // check if movie is favorite
+  const isMovieFavorite = isFavorite(movie.id);
 
-    return (
+  return (
     <div className="movie-detail-page">
       {/* Back Navigation */}
       <nav className="detail-nav">
@@ -77,10 +70,7 @@ export function MovieDetailPage() {
 
       {/* Backdrop Image */}
       {backdropUrl && (
-        <div
-          className="movie-backdrop"
-          style={{ backgroundImage: `url(${backdropUrl})` }}
-        />
+        <div className="movie-backdrop" style={{ backgroundImage: `url(${backdropUrl})` }} />
       )}
 
       {/* Main Content */}
@@ -94,27 +84,19 @@ export function MovieDetailPage() {
         <div className="movie-detail-info">
           <h1 className="movie-detail-title">{movie.title}</h1>
 
-          {movie.tagline && (
-            <p className="movie-detail-tagline">"{movie.tagline}"</p>
-          )}
+          {movie.tagline && <p className="movie-detail-tagline">"{movie.tagline}"</p>}
 
           {/* Meta Information */}
           <div className="movie-detail-meta">
-            <span className="meta-item">
-              {formatDate(movie.release_date)}
-            </span>
-            <span className="meta-item">
-              {formatRuntime(movie.runtime)}
-            </span>
-            <span className="meta-item">
-              {movie.vote_average?.toFixed(1)} / 10
-            </span>
+            <span className="meta-item">{formatDate(movie.release_date)}</span>
+            <span className="meta-item">{formatRuntime(movie.runtime)}</span>
+            <span className="meta-item">{movie.vote_average?.toFixed(1)} / 10</span>
           </div>
 
           {/* Genres */}
           {movie.genres && movie.genres.length > 0 && (
             <div className="movie-detail-genres">
-              {movie.genres.map(genre => (
+              {movie.genres.map((genre) => (
                 <span key={genre.id} className="genre-tag">
                   {genre.name}
                 </span>
